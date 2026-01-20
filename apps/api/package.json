@@ -5,7 +5,7 @@
   "description": "api server of lovable like app - plutolab",
   "main": "index.ts",
   "scripts": {
-    "dev": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
     "start": "bun src/index.ts"
   },
   "dependencies": {
