@@ -26,7 +26,7 @@ model Project {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  chats Chat[]
+  chats Chat[]              // conversations inside this project
   files ProjectFile[]
 
   createdAt DateTime @default(now())
@@ -35,7 +35,6 @@ model Project {
 
 model Chat {
   id        String @id @default(cuid())
-
   projectId String
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
@@ -46,18 +45,16 @@ model Chat {
 
 model Message {
   id      String @id @default(cuid())
-
   chatId String
   chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   role    MessageRole
   content String @db.Text
 
-  toolName String?
+  toolName String?          // tool used by agent (e.g. CREATE_FILE)
   toolData Json?
 
   createdAt DateTime @default(now())
-
   @@index([chatId])
 }
 
