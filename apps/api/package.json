@@ -2,14 +2,10 @@
   "name": "api",
   "module": "index.ts",
   "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+  "description": "api server of lovable like app - plutolab",
+  "main": "index.ts",
+  "scripts": {
+
   },
   "dependencies": {
     "@auth/express": "^0.12.1",
@@ -20,5 +16,10 @@
     "http": "^0.0.1-security",
     "jwt": "^0.2.0",
     "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6"
   }
 }

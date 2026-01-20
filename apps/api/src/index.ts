@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 8000;
 
 const ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://localhost:8000"
 ]
 app.use(
     cors({

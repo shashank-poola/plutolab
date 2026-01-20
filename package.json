@@ -23,5 +23,11 @@
   "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.3.5"
   }
 }
