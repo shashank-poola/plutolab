@@ -2,7 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import http from "http";
 import express from "express";
-import routes from "./routes"
+import routes from "./routes/authRoute";
 
 const app = express();
 const server = http.createServer(app);
@@ -16,7 +16,7 @@ const ALLOWED_ORIGINS = [
 app.use(
     cors({
         origin: ALLOWED_ORIGINS,
-        Credential: true,
+        credentials: true,
     })
 );
 
