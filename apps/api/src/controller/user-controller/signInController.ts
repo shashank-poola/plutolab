@@ -2,18 +2,21 @@ import type { Request, Response } from "express";
 import { db } from "@repo/database";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.SERVER_JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export default async function signInController(req: Request, res: Response) {
+  console.log("SIGNIN HIT", req.body);
   const { user, account } = req.body;
 
   try {
     const provider = account?.provider;
     const githubAccessToken = account?.provider === "github" ? account.access_token : null;
 
+    console.log("BEFORE DB");
     const exisitingUser = await db.user.findUnique({
       where: { email: user.email },
     });
+    console.log("AFTER DB", exisitingUser);
 
     let myUser;
 
