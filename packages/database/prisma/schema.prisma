@@ -35,7 +35,7 @@ model Chat {
   id        String @id @default(cuid())
   projectId String
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
+  
   messages Message[]
 
   createdAt DateTime @default(now())
@@ -48,7 +48,6 @@ model Message {
 
   role    MessageRole
   content String @db.Text
-
   toolName String?          // tool used by agent (e.g. CREATE_FILE)
   toolData Json?
 
