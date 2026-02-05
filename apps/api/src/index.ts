@@ -17,11 +17,11 @@ app.use(
     cors({
         origin: ALLOWED_ORIGINS,
         credentials: true,
-    })
+    }),
 );
 
-app.use("/api/v1", routes)
+app.use("/api/v1", routes);
 
-server.listen(8000, () => {
+server.listen(PORT, () => {
     console.log("Server is running port : 8000")
-})
+});
