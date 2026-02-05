@@ -2,7 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import http from "http";
 import express from "express";
-import routes from "./routes/authRoute";
+import routes from "./routes";
 
 const app = express();
 const server = http.createServer(app);

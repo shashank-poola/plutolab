@@ -1,13 +1,10 @@
 import { Router } from "express";
 import signInController from "../controller/user-controller/signInController";
-import checkController, { meController } from "../controller/user-controller/checkController";
+import checkController from "../controller/user-controller/checkController";
 
-const router = Router();
+const Userrouter = Router();
 
-router.get("/health", checkController);
+Userrouter.get("/health", checkController);
+Userrouter.post("/signin", signInController);
 
-router.get("/me", meController)
-
-router.post("/signin", signInController);
-
-export default router;
+export default Userrouter;
