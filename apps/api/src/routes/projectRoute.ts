@@ -7,3 +7,4 @@ const projectRouter = Router();
 projectRouter.post("/", createPlayground);
 projectRouter.get("/", getPlayground);
 
+export default projectRouter;
