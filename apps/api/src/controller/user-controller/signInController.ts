@@ -12,11 +12,9 @@ export default async function signInController(req: Request, res: Response) {
     const provider = account?.provider;
     const githubAccessToken = account?.provider === "github" ? account.access_token : null;
 
-    console.log("BEFORE DB");
     const exisitingUser = await db.user.findUnique({
       where: { email: user.email },
     });
-    console.log("AFTER DB", exisitingUser);
 
     let myUser;
 
@@ -63,11 +61,13 @@ export default async function signInController(req: Request, res: Response) {
       token: token,
     });
     return;
+
   } catch (err) {
     console.error("Authentication error", err);
     res.status(500).json({
-      success: false,
-      error: "Authentication failed",
+      "success": false,
+      "data": null,
+      "error": "INTERNAL_SERVER_ERRO",
     });
   }
 }
