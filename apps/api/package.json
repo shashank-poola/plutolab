@@ -9,6 +9,7 @@
     "start": "bun src/index.ts"
   },
   "dependencies": {
+    "@e2b/code-interpreter": "^2.3.3",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

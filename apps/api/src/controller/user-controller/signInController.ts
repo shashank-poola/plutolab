@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export default async function signInController(req: Request, res: Response) {
-  console.log("SIGNIN HIT", req.body);
   const { user, account } = req.body;
 
   try {
