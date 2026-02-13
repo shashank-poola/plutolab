@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { projectSchema } from "../../schema/projectSchema";
 
 export const createPlayground = async ( req: Request, res: Response ) => {
     try {
