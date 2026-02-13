@@ -11,7 +11,7 @@ export const createPlayground = async ( req: Request, res: Response ) => {
             res.status(403).json({
                 success: false,
                 data: null,
-                error: "Unauthorized"
+                error: "UNAUTHORIZED"
             })
             return;
         }
@@ -108,7 +108,7 @@ export const getPlaygroundById = async ( req: Request, res: Response ) => {
             res.status(400).json({
                 success: false,
                 data: null,
-                error: "PROJECTID_REQUIRED"
+                error: "INVALID_PROJECT_ID"
             })
             return;
         }
