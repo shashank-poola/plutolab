@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const projectSchema = z.object({
+    userId: z.string().min(1),
     title: z.string().min(1).max(120),
     initialPrompt: z.string().min(1),
     sandboxId: z.string().optional(),
