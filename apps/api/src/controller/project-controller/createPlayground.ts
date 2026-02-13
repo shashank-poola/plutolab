@@ -90,5 +90,45 @@ export const getPlayground = async ( req: Request, res: Response ) => {
 };
 
 export const getPlaygroundById = async ( req: Request, res: Response ) => {
-    
+    try {
+        const { user } = req.user?.id;
+
+        if (!user) {
+            res.status(401).json({
+                success: false,
+                data: null,
+                error: "Unauthorized",
+            })
+            return;
+        }
+
+        const { projectId } = req.params;
+
+        if (!projectId) {
+            res.status(400).json({
+                success: false,
+                data: null,
+                error: "ProjectId is required"
+            })
+            return;
+        }
+
+        const project = await db.project.findUnique({
+            where: {
+                userId: user,
+                project: projectId,
+            },
+        });
+
+
+
+    } catch (error) {
+        console.log("getPlaygroundById failed", error);
+        res.status(500).json({
+            success: false,
+            data: null,
+            error: "INTERNAL_SERVER_ERROR"
+        })
+        return;
+    }
 };
