@@ -1,11 +1,11 @@
 import { Sandbox } from "@e2b/code-interpreter";
-import { db, Prisma } from "@repo/database";
+import { db } from "@repo/database";
 
 export async function createSandbox(projectId: string) {
     let sandbox: Sandbox | null = null;
     let isNewSandbox = false;
 
-    const project = await prisma.project.findUnique({
+    const project = await db.project.findUnique({
         where: {
             id: projectId
         },
@@ -28,7 +28,7 @@ export async function createSandbox(projectId: string) {
         sandbox = await Sandbox.create("plutolab-react-base")
         project.sandboxId = sandbox.sandboxId;
 
-        await prisma.project.update({
+        await db.project.update({
             where: {
                 id: projectId
             },

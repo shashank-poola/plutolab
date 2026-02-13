@@ -61,12 +61,11 @@ export default async function signInController(req: Request, res: Response) {
     });
     return;
 
-  } catch (err) {
-    console.error("Authentication error", err);
+  } catch (error) {
     res.status(500).json({
       "success": false,
       "data": null,
-      "error": "INTERNAL_SERVER_ERRO",
+      "error": "INTERNAL_SERVER_ERROR",
     });
   }
 }

@@ -7,52 +7,49 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String?  @unique // from OAuth provider (Google/GitHub)
-  name      String?
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String
   image     String?
 
-  projects Project[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  projects  Project[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  chats Chat[]              // conversations inside this project
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Chat {
-  id        String @id @default(cuid())
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  
-  messages Message[]
-
-  createdAt DateTime @default(now())
+  id            String        @id @default(uuid())
+  title         String
+  initialPrompt String
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sandboxId     String?
+  sandboxUrl    String?
+  messages      Message[]
+  files         ProjectFile[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Message {
-  id      String @id @default(cuid())
-  chatId String
-  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  id        String        @id @default(cuid())
+  projectId String
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  role      MessageRole
+  content   String        @db.Text
+  toolName  String?
+  toolData  Json?
+  createdAt DateTime      @default(now())
+}
 
-  role    MessageRole
-  content String @db.Text
-  toolName String?          // tool used by agent (e.g. CREATE_FILE)
-  toolData Json?
-
-  createdAt DateTime @default(now())
-  @@index([chatId])
+model ProjectFile {
+  id        String     @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  filePath  String
+  content   String?    @db.Text
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 enum MessageRole {
@@ -60,4 +57,3 @@ enum MessageRole {
   AI
   SYSTEM
 }
-
