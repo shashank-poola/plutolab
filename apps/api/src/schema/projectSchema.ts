@@ -1,20 +1,14 @@
 import { z } from "zod";
 
-export const messageEnumSystem = z.enum(["USER", "AI", "SYSTEM"]);
-
 export const projectSchema = z.object({
-    name: z.string().min(1),
-    description: z.string().optional()
+    title: z.string().min(1).max(120),
+    initialPrompt: z.string().min(1),
+    sandboxId: z.string().optional(),
+    sandboxUrl: z.string().url().optional(),
 });
 
-export const chatSchema = z.object({
+export const projectFileSchema = z.object({
     projectId: z.string(),
-});
-
-export const messageSchema = z.object({
-    chatId: z.string().cuid(),
-    role: messageEnumSystem,
-    content: z.string().min(1),
-    toolName: z.string().optional(),
-    toolData: z.unknown().optional()
-});
+    filePath: z.string().min(1),
+    content: z.string().optional(),
+})
