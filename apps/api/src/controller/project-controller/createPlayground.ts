@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { projectSchema } from "../../schema/projectSchema";
 import { db } from "@repo/database";
+import { success } from "zod";
 
 export const createPlayground = async ( req: Request, res: Response ) => {
     try {
@@ -53,7 +54,39 @@ export const createPlayground = async ( req: Request, res: Response ) => {
 };
 
 export const getPlayground = async ( req: Request, res: Response ) => {
-    
+    try {
+        const user = req.user?.id;
+
+        if (!user) {
+            res.status(401).json({
+                success: false,
+                data: null,
+                error: "Unauthorized"
+            })
+            return;
+        }
+
+        const projects = await db.project.findMany({
+            where: {
+                userId: user
+            },
+        })
+
+        return res.status(200).json({
+            success: true,
+            data: projects,
+            error: null,
+        });
+
+    } catch (error) {
+        console.log("getPlayground error", error);
+        res.status(500).json({
+            success: false,
+            data: null,
+            error: "INTERNAL_SERVER_ERROR",
+        })
+        return;
+    };
 };
 
 export const getPlaygroundById = async ( req: Request, res: Response ) => {
