@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 import { projectSchema } from "../../schema/projectSchema";
 import { db } from "@repo/database";
-import { success } from "zod";
 
 export const createPlayground = async ( req: Request, res: Response ) => {
     try {
@@ -22,7 +21,7 @@ export const createPlayground = async ( req: Request, res: Response ) => {
             res.status(401).json({
                 success: false,
                 data: null,
-                error: "All fields are required"
+                error: "INVALID_REQUEST_BODY"
             })
             return;
         }
