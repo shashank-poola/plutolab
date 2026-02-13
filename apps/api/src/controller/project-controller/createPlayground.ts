@@ -91,20 +91,20 @@ export const getPlayground = async ( req: Request, res: Response ) => {
 
 export const getPlaygroundById = async ( req: Request, res: Response ) => {
     try {
-        const { user } = req.user?.id;
+        const user = req.user?.id;
 
         if (!user) {
             res.status(401).json({
                 success: false,
                 data: null,
-                error: "Unauthorized",
+                error: "UNAUTHORIZED",
             })
             return;
         }
 
         const { projectId } = req.params;
 
-        if (!projectId) {
+        if (typeof projectId !== "string") {
             res.status(400).json({
                 success: false,
                 data: null,
@@ -113,14 +113,27 @@ export const getPlaygroundById = async ( req: Request, res: Response ) => {
             return;
         }
 
-        const project = await db.project.findUnique({
+        const project = await db.project.findFirst({
             where: {
                 userId: user,
-                project: projectId,
+                id: projectId,
             },
         });
 
+        if (!project) {
+            res.status(404).json({
+                success: false,
+                data: null,
+                error: "PROJECT_NOT_FOUND"
+            })
+            return;
+        }
 
+        return res.status(200).json({
+            success: true,
+            data: project,
+            error: null,
+        });
 
     } catch (error) {
         console.log("getPlaygroundById failed", error);
