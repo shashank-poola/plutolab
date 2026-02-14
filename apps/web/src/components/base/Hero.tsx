@@ -1,6 +1,7 @@
 "use client";
 
 import Grainient from "./Gradient";
+import { Dashboard } from "./Dashboard";
 
 interface HeroProps {
   className?: string;
@@ -9,7 +10,6 @@ interface HeroProps {
 export function Hero({ className = "" }: HeroProps) {
   return (
     <div className={`relative min-h-screen w-full overflow-hidden ${className}`.trim()}>
-      {/* Gradient Background */}
       <div className="absolute inset-0 w-full h-full">
         <Grainient
           color1="#0f0c29"
@@ -38,16 +38,17 @@ export function Hero({ className = "" }: HeroProps) {
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 gap-12">
         <h1 className="text-center">
-          <span className="block text-5xl md:text-7xl lg:text-8xl font-serif font-normal text-white leading-tight">
+          <span className="block text-3xl md:text-4xl lg:text-5xl font-serif font-normal text-white leading-tight">
             built lovable like apps
           </span>
-          <span className="block text-5xl md:text-7xl lg:text-8xl font-serif font-normal text-white leading-tight mt-2">
+          <span className="block text-3xl md:text-4xl lg:text-5xl font-serif font-normal text-white leading-tight mt-2">
             with just one prompt
           </span>
         </h1>
+
+        <Dashboard />
       </div>
     </div>
   );
