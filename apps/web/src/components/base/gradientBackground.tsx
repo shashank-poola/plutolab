@@ -1,4 +1,4 @@
-import Grainient from './Grainient';
+import Grainient from './Gradient';
 
 <div style={{ width: '100%', height: '600px', position: 'relative' }}>
   <Grainient
